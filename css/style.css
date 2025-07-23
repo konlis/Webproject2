@@ -1,5 +1,5 @@
 :root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --primary-gradient: linear-gradient(135deg, #66ea71 0%, #4ba259 100%);
     --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
@@ -353,6 +353,122 @@ header {
     line-height: 1.7;
 }
 
+/* Order Process Section */
+.order-process {
+    padding: clamp(4rem, 10vw, 8rem) 0;
+    background: white;
+    position: relative;
+}
+
+.order-timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
+    position: relative;
+}
+
+.order-step {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 25px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    overflow: hidden;
+}
+
+.order-step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.order-step:hover::before {
+    transform: scaleX(1);
+}
+
+.order-step:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    background: white;
+}
+
+.order-step .step-number {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 80px;
+    height: 80px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 900;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    margin: 0 auto 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.order-step:hover .step-number {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.order-step h4 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.order-step p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.step-highlight {
+    background: var(--accent-gradient);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.btn-step {
+    background: var(--secondary-gradient);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-soft);
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.btn-step:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-hover);
+}
+
 /* Coverage Section with Modern Map */
 .coverage {
     padding: clamp(4rem, 10vw, 8rem) 0;
@@ -570,21 +686,16 @@ footer {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* Scroll Progress */
-.scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--secondary-gradient);
-    transform-origin: left;
-    transform: scaleX(0);
-    z-index: 1001;
-    transition: transform 0.1s ease;
-}
+
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+    .order-timeline {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+}
+
 @media (max-width: 1024px) {
     .coverage-grid {
         grid-template-columns: 1fr;
@@ -593,6 +704,10 @@ footer {
 
     .features-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .order-timeline {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 }
 
@@ -619,8 +734,10 @@ footer {
         justify-content: center;
     }
 
-    .process-timeline {
+    .process-timeline,
+    .order-timeline {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .form-row {
@@ -629,6 +746,24 @@ footer {
 
     .features-grid {
         grid-template-columns: 1fr;
+    }
+
+    .order-step {
+        padding: 2rem 1.5rem;
+    }
+
+    .order-step .step-number {
+        width: 70px;
+        height: 70px;
+        font-size: 1.3rem;
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+
+    .section-subtitle {
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
     }
 }
 
@@ -642,8 +777,67 @@ footer {
     }
 
     .feature-card,
-    .process-step {
+    .process-step,
+    .order-step {
         padding: 1.5rem;
+    }
+
+    .hero h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .order-step .step-number {
+        width: 60px;
+        height: 60px;
+        font-size: 1.1rem;
+    }
+
+    .step-highlight {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .btn-step {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    .hero {
+        padding: 6rem 0 3rem;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .order-step,
+    .process-step,
+    .feature-card {
+        padding: 1.25rem;
     }
 }
 

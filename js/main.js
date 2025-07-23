@@ -1,11 +1,4 @@
-// Scroll Progress Bar
-function updateScrollProgress() {
-    const scrollProgress = document.querySelector('.scroll-progress');
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollPercent = (scrollTop / height);
-    scrollProgress.style.transform = `scaleX(${scrollPercent})`;
-}
+
 
 // Header scroll effect
 function updateHeader() {
@@ -112,12 +105,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add scroll event listeners
     window.addEventListener('scroll', () => {
-        updateScrollProgress();
         updateHeader();
     });
     
     // Initial calls
-    updateScrollProgress();
     updateHeader();
 });
 
@@ -137,6 +128,5 @@ function throttle(func, limit) {
 
 // Apply throttling to scroll events
 window.addEventListener('scroll', throttle(() => {
-    updateScrollProgress();
     updateHeader();
 }, 16)); // ~60fps 
